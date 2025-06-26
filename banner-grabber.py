@@ -33,3 +33,23 @@ def is_valid_ip(ip: str) -> bool:
         return True
     except socket.error:
         return False
+
+def main():
+    ip = input("Enter the target IP address: ").strip()
+
+    if not is_valid_ip(ip):
+        print("Invalid IP address")
+        sys.exit(1)
+
+    try:
+        port = int(input("Enter the target port number: ").strip())
+        if not (1 <= port <= 65535):
+            raise ValueError
+    except ValueError:
+        print("Invalid port number")
+        sys.exit(1)
+
+    grab_banner(ip, port)
+
+if __name__ == "__main__":
+    main()
